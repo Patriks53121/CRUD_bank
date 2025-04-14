@@ -1,8 +1,8 @@
 package org.backend.bank.models;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -16,8 +16,8 @@ import lombok.NoArgsConstructor;
 public class Bank {
 
     @Id
-    @GeneratedValue
-    private int id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private  int id;
 
     @Column(name="name")
     private String name;
@@ -26,12 +26,14 @@ public class Bank {
     @Column(name="phone")
     private String phone;
 
-    @PrimaryKeyJoinColumn(name = "bank_account_id")
-    @OneToMany
+
+    @OneToMany(mappedBy = "bank")
+    @JsonBackReference
     private List<BankAccount> bankAccounts;
 
-    @PrimaryKeyJoinColumn(name = "transfer_id")
-    @OneToMany
+
+    @OneToMany(mappedBy = "bank")
+    @JsonBackReference
     private List<Transfer> transfers;
 
 }

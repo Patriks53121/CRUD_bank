@@ -3,7 +3,6 @@ package org.backend.bank.models;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @Data
@@ -14,8 +13,8 @@ import lombok.NoArgsConstructor;
 public class User{
 
     @Id
-    @GeneratedValue
-    private int id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private  int id;
 
     @Column(name="name")
     private String name;
@@ -26,8 +25,7 @@ public class User{
     @Column(name="email")
     private String email;
 
-    @PrimaryKeyJoinColumn(name = "bank_account_id")
-    @OneToOne
+    @OneToOne(mappedBy = "user")
     private BankAccount bankAccount;
 
 }

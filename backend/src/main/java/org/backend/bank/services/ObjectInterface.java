@@ -6,7 +6,7 @@ import org.backend.bank.models.Transfer;
 import org.backend.bank.models.User;
 import org.springframework.stereotype.Repository;
 
-public interface ObjectInterface<T> {
+public interface ObjectInterface {
 
     Object update(BankAccount bankAccount);
     Object update(User user);

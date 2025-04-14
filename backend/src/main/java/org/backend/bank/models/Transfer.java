@@ -12,11 +12,11 @@ import java.util.UUID;
 @NoArgsConstructor
 @Entity
 @Table(name = "transfers")
-public class Transfer {
+public class Transfer{
 
     @Id
-    @GeneratedValue
-    private int id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private  int id;
 
     @Column(name="uuid")
     private UUID uuid = UUID.randomUUID();
@@ -26,9 +26,12 @@ public class Transfer {
     @Column(name="description")
     private String description;
 
+    @JoinColumn(name = "bank_id", nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY)
+    Bank bank;
 
-    @PrimaryKeyJoinColumn(name = "bank_account_id")
-    @ManyToOne
+    @JoinColumn(name = "bank_account_id", nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY)
     private BankAccount sender;
 
 }
