@@ -11,8 +11,10 @@ import org.backend.bank.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.awt.print.Book;
+
 @Service
-public class objectService implements ObjectInterface {
+public class ObjectService implements ObjectInterface {
 
     @Autowired
     private BankAccRepository bankAccountRepo;
@@ -44,7 +46,7 @@ public class objectService implements ObjectInterface {
     }
 
     @Override
-    public Object update(Bank bank) {
+    public Bank update(Bank bank) {
         Bank existingBank = bankRepo.findById(bank.getId()).orElseThrow(() -> new RuntimeException("Bank with id:" +  bank.getId() + " not found"));
         existingBank.setBankAccounts(bank.getBankAccounts());
         existingBank.setTransfers(bank.getTransfers());
@@ -52,7 +54,7 @@ public class objectService implements ObjectInterface {
     }
 
     @Override
-    public Object update(Transfer transfer) {
+    public Transfer update(Transfer transfer) {
         Transfer existingTransfer = transferRepo.findById(transfer.getId()).orElseThrow(() -> new RuntimeException("Transfer with id:" + transfer.getId() + " not found"));
         existingTransfer.setUuid(transfer.getUuid());
         existingTransfer.setAmount(transfer.getAmount());
@@ -60,5 +62,39 @@ public class objectService implements ObjectInterface {
         existingTransfer.setDescription(transfer.getDescription());
         return transferRepo.save(existingTransfer);
     }
+
+    @Override
+    public BankAccount save(BankAccount bankAccount) {
+        return bankAccountRepo.save(bankAccount);
+    }
+
+    @Override
+    public User save(User user) {
+        return userRepo.save(user);
+    }
+
+    @Override
+    public Bank save(Bank bank) {
+        return bankRepo.save(bank);
+    }
+
+    @Override
+    public Transfer save(Transfer transfer) {
+        return transferRepo.save(transfer);
+    }
+
+    @Override
+    public Object findAll(Object object) {
+
+        return
+                switch (object) {
+            case BankAccount b -> bankAccountRepo.findAll();
+            case User u -> userRepo.findAll();
+            case Bank b -> bankRepo.findAll();
+            case Transfer t -> transferRepo.findAll();
+            default -> "error";
+        };
+    }
+
 
 }

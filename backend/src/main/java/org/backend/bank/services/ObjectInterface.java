@@ -8,8 +8,16 @@ import org.springframework.stereotype.Repository;
 
 public interface ObjectInterface {
 
-    Object update(BankAccount bankAccount);
-    Object update(User user);
-    Object update(Bank bank);
-    Object update(Transfer transfer);
+    BankAccount update(BankAccount bankAccount);
+    User update(User user);
+    Bank update(Bank bank);
+    Transfer update(Transfer transfer);
+
+    BankAccount save(BankAccount bankAccount);
+    User save(User user);
+    Bank save(Bank bank);
+    Transfer save(Transfer transfer);
+
+    Object findAll(Object object);
+
 }

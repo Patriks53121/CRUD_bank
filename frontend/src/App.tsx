@@ -1,11 +1,11 @@
 import './App.css'
-import ListComponent from "./components/ListComponent.tsx";
+import BankComponent from "./components/BankComponent.tsx";
 
 function App() {
 
   return (
     <>
-        <ListComponent/>
+        <BankComponent/>
     </>
   )
 }

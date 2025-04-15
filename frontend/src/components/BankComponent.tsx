@@ -1,9 +1,9 @@
 import {useEffect, useState} from 'react';
-import {listComponents} from "../services/objectService.ts";
+import {listComponents} from "../services/BankService.ts";
 
-const ListComponent = () => {
+const BankComponent = () => {
 
-    const [banks, setBanks] = useState([])
+    const [banks, setBanks] = useState<{ id: number; name: string; address: string; phone: string; }[]>([])
 
     useEffect(()=>{
         listComponents().then((response) => {
@@ -16,7 +16,7 @@ const ListComponent = () => {
     return (
         <div className='container'>
 
-            <h2>List of ...</h2>
+            <h2>List of Banks</h2>
             <table className='table table-striped table-bordered'>
                 <thead>
                     <tr>
@@ -43,4 +43,4 @@ const ListComponent = () => {
     )
 }
 
-export default ListComponent;
+export default BankComponent;
